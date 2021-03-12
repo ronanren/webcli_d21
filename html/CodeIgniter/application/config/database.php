@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'servbdd.iutlan.etu.univ-rennes1.fr',
+	'hostname' => 'pg.infolannion.com',
 	'username' => 'd21',
-	'password' => '',
+	'password' => 'Unjosafi8',
 	'database' => 'pg_d21',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
