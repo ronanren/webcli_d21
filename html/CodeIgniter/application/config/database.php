@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
+	'hostname' => 'servbdd.iutlan.etu.univ-rennes1.fr',
+	'username' => 'd21',
 	'password' => '',
-	'database' => '',
-	'dbdriver' => 'mysqli',
+	'database' => 'pg_d21',
+	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
