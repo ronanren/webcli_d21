@@ -9,6 +9,8 @@ class Index extends CI_Controller {
             show_404();
         }
         $data['content']=$content;
+
+        $this->load->helper('url');
         $this->load->vars($data);
         $this->load->view('template');
     }
