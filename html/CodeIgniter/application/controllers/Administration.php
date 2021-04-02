@@ -20,7 +20,7 @@
 			}
 			$data['users'] = $this->User_model->users_list();
 			$data['title'] = 'Administration';
-			$data['content'] = 'Administration/administration';
+			$data['content'] = 'administration';
 			$this->load->vars($data);
 			$this->load->view('template');
 		}

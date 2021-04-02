@@ -105,27 +105,43 @@ class User extends CI_Controller
         redirect(base_url('user/login_view'));
     }
 
-    public function user_ban($user)
+    public function user_ban($id)
     {
-        $this->user_model->user_ban($user);
-        $this->session->set_flashdata('success_msg', 'This user has been ban successfully.');
+        $user = $this->user_model->get_user_by_id($id);
+        $this->user_model->user_ban($id);
+        $this->session->set_flashdata('success_msg', $user->username . ' has been banned successfully.');
+        redirect(base_url('administration'));
     }
 
-    public function user_unban($user)
+    public function user_unban($id)
     {
-        $this->user_model->user_unban($user);
-        $this->session->set_flashdata('success_msg', 'This user has been unban successfully.');
+        $user = $this->user_model->get_user_by_id($id);
+        $this->user_model->user_unban($id);
+        $this->session->set_flashdata('success_msg', $user->username . ' has been unbanned successfully.');
+        redirect(base_url('administration'));
     }
 
-    public function user_grantAdmin($user)
+    public function user_grant_admin($id)
     {
-        $this->user_model->user_grantAdmin($user);
-        $this->session->set_flashdata('success_msg', 'This user has been grant admin access successfully.');
+        $user = $this->user_model->get_user_by_id($id);
+        $this->user_model->user_grant_admin($id);
+        $this->session->set_flashdata('success_msg', $user->username . ' has been granted admin access successfully.');
+        redirect(base_url('administration'));
     }
 
-    public function user_delete($user)
+    public function user_ungrant_admin($id)
     {
-        $this->user_model->user_delete($user);
-        $this->session->set_flashdata('success_msg', 'This user has been delete successfully.');
+        $user = $this->user_model->get_user_by_id($id);
+        $this->user_model->user_ungrant_admin($id);
+        $this->session->set_flashdata('success_msg', $user->username . ' has been ungranted admin access successfully.');
+        redirect(base_url('administration'));
+    }
+
+    public function user_delete($id)
+    {
+        $user = $this->user_model->get_user_by_id($id);
+        $this->user_model->user_delete($id);
+        $this->session->set_flashdata('success_msg', $user->username . ' has been deleted successfully.');
+        redirect(base_url('administration'));
     }
 }
