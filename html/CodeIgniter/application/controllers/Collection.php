@@ -24,5 +24,12 @@ class Collection extends CI_Controller
     public function AddToCollection($idGame)
     {
         $this->Collection_model->createOrUpdate($idGame);
+        redirect(base_url('Games'));
+    }
+
+    public function RemoveToCollection($idGame)
+    {
+        $this->Collection_model->delete($idGame);
+        redirect(base_url('Collection'));
     }
 }
