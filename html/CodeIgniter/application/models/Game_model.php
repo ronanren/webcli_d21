@@ -1,6 +1,7 @@
 <?php
-class Game_model extends CI_Model {
-  
+class Game_model extends CI_Model
+{
+
     public function __construct()
     {
         $this->load->database();
@@ -11,7 +12,7 @@ class Game_model extends CI_Model {
         $query = $this->db->get('games');
         return $query->result_array();
     }
-     
+
     public function get_game_by_id($id)
     {
         $query = $this->db->get_where('games', array('id' => $id));
