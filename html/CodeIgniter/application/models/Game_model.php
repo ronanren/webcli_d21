@@ -9,7 +9,9 @@ class Game_model extends CI_Model
 
     public function games_list()
     {
-        $query = $this->db->get('games');
+        $this->db->from('games');
+        $this->db->order_by("sortie", "desc");
+        $query = $this->db->get();
         return $query->result_array();
     }
 
