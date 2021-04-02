@@ -37,6 +37,12 @@ class User_model extends CI_model
             return true;
     }
 
+    public function get_user_by_id($id)
+    {
+        $query = $this->db->get_where('users', array('id' => $id));
+        return $query->row();
+    }
+
     public function users_list()
     {
         $query = $this->db->get('users');
@@ -46,19 +52,25 @@ class User_model extends CI_model
     public function user_ban($id)
     {
         $this->db->where('id', $id);
-        $this->db->update('role', "banned");
+        $this->db->update('users', ['role' => 'banned']);
     }
 
     public function user_unban($id)
     {
         $this->db->where('id', $id);
-        $this->db->update('role', "collector");
+        $this->db->update('users', ['role' => 'collector']);
     }
 
-    public function user_grantAdmin($id)
+    public function user_grant_admin($id)
     {
         $this->db->where('id', $id);
-        $this->db->update('role', "admin");
+        $this->db->update('users', ['role' => 'admin']);
+    }
+
+    public function user_ungrant_admin($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('users', ['role' => 'collector']);
     }
 
     public function user_delete($id)
