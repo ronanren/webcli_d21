@@ -27,8 +27,6 @@ class User extends CI_Controller
             'password' => md5($this->input->post('user_password'))
         );
 
-
-
         $name_check = $this->user_model->name_check($user['username']);
 
         if ($name_check) {
@@ -61,7 +59,11 @@ class User extends CI_Controller
         if ($data['users']) {
             $this->session->set_userdata('user_id', $data['users'][0]['id']);
             $this->session->set_userdata('user_name', $data['users'][0]['username']);
-            $this->load->view('user/profile.php', $data);
+
+            $data['title'] = 'Profile';
+            $data['content'] = 'user/profile';
+            $this->load->vars($data);
+            $this->load->view('template');
         } else {
             $this->session->set_flashdata('error_msg', 'Wrong combination of username and password. Please retry.');
             redirect(base_url('user/login_view'));
