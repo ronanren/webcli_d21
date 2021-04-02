@@ -22,9 +22,9 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Games</a>
+                                <a href="<?php echo base_url("Games"); ?>" class="<?php echo $this->router->fetch_class() == "Games" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Games</a>
 
-                                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Collections</a>
+                                <a href="<?php echo base_url("Collection"); ?>" class="<?php echo $this->router->fetch_class() == "Collection" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Collection</a>
 
                                 <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administration</a>
                             </div>
@@ -91,9 +91,9 @@
             <div class="hidden md:hidden" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Games</a>
+                    <a href="<?php echo base_url("Games"); ?>" class="<?php echo $this->router->fetch_class() == "Games" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Games</a>
 
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Collection</a>
+                    <a href="<?php echo base_url("Collection"); ?>" class="<?php echo $this->router->fetch_class() == "Collection" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Collection</a>
 
                     <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Administration</a>
                 </div>
