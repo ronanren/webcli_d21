@@ -36,4 +36,10 @@ class User_model extends CI_model
         else
             return true;
     }
+
+    public function users_list()
+    {
+        $query = $this->db->get('users');
+        return $query->result_array();
+    }
 }
