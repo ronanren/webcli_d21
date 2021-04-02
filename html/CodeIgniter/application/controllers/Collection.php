@@ -6,9 +6,11 @@ class Collection extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Collection_model');
+        $this->load->model('Game_model');
         $this->load->helper('url_helper');
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->library('session');
     }
 
     public function index()
@@ -24,12 +26,16 @@ class Collection extends CI_Controller
     public function AddToCollection($idGame)
     {
         $this->Collection_model->createOrUpdate($idGame);
+        $game = $this->Game_model->get_game_by_id($idGame);
+        $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection.');
         redirect(base_url('Games'));
     }
 
     public function RemoveToCollection($idGame)
     {
         $this->Collection_model->delete($idGame);
+        $game = $this->Game_model->get_game_by_id($idGame);
+        $this->session->set_flashdata('success_msg', $game->titre . ' deleted to your collection.');
         redirect(base_url('Collection'));
     }
 }
