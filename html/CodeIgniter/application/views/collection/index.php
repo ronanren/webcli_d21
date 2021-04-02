@@ -30,7 +30,7 @@
                 <td class="px-6 py-4 whitespace-nowrap"><?php echo $game['titre']; ?></td>
                 <td class="px-6 py-4 whitespace-nowrap"><?php echo $game['sortie']; ?></td>
                 <td>
-                  <a href="<?php echo base_url("Collection/AddToCollection/" . $game['id']); ?>" class="btn red" style="height: 20px; border-radius:4px;">Add to your collection</a>
+                  <a href="<?php echo base_url("Collection/RemoveToCollection/" . $game['id']); ?>" class="btn red" style="height: 20px; border-radius:4px;">Remove from your collection</a>
                 </td>
               </tr>
             <?php endforeach; ?>
