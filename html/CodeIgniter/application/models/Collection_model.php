@@ -37,7 +37,7 @@ class Collection_model extends CI_Model
 
     public function delete($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where(array('game_id' => $id, 'user_id' => 1));
         return $this->db->delete('collection');
     }
 }
