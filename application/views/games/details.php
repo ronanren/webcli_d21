@@ -17,7 +17,7 @@
           </p>
           <div class="mt-5 sm:mt-8 sm:mr-3 sm:flex sm:justify-center lg:justify-start">
             <?php if (null != $this->session->userdata("user_id")) { ?>
-              <div class="rounded-md shadow">
+              <div class="rounded-md shadow mr-8">
                 <?php if (!$added) { ?>
                   <a href="<?php echo base_url("Collection/AddToCollection/" . $game->id); ?>" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                     Add to your collection

@@ -8,7 +8,7 @@
       <p class="mt-2 text-center text-sm text-gray-600">
         Or
         <a href="<?php echo base_url('user/login_view'); ?>" class="font-medium text-indigo-600 hover:text-indigo-500">
-			sign in to your account
+          sign in to your account
         </a>
       </p>
     </div>
@@ -33,7 +33,7 @@
               <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
             </svg>
           </span>
-          Register
+          Sign up
         </button>
       </div>
     </form>
