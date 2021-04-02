@@ -95,4 +95,28 @@ class User extends CI_Controller
         $this->session->set_flashdata('success_msg', 'You have been disconnected successfully.');
         redirect(base_url('user/login_view'), 'refresh');
     }
+
+    public function user_ban($user)
+    {
+        $this->user_model->user_ban($user);
+        $this->session->set_flashdata('success_msg', 'This user has been ban successfully.');
+    }
+
+    public function user_unban($user)
+    {
+        $this->user_model->user_unban($user);
+        $this->session->set_flashdata('success_msg', 'This user has been unban successfully.');
+    }
+
+    public function user_grantAdmin($user)
+    {
+        $this->user_model->user_grantAdmin($user);
+        $this->session->set_flashdata('success_msg', 'This user has been grant admin access successfully.');
+    }
+
+    public function user_delete($user)
+    {
+        $this->user_model->user_delete($user);
+        $this->session->set_flashdata('success_msg', 'This user has been delete successfully.');
+    }
 }

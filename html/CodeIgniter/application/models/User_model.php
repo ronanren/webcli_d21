@@ -36,4 +36,27 @@ class User_model extends CI_model
         else
             return true;
     }
+
+    public function user_ban($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('role', "banned");
+    }
+
+    public function user_unban($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('role', "collector");
+    }
+
+    public function user_grantAdmin($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('role', "admin");
+    }
+
+    public function user_delete($id)
+    {
+        $this->db->query("DELETE FROM users WHERE id = $id");
+    }
 }
