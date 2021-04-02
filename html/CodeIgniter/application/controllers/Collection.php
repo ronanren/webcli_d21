@@ -15,6 +15,10 @@ class Collection extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata("user_id") == null) {
+            $this->session->set_flashdata('error_msg', 'You are not connected.');
+            redirect(base_url('user/login_view'));
+        }
         $data['games'] = $this->Collection_model->get_games_by_collection_id(1);
         $data['title'] = 'Collection';
         $data['content'] = 'collection/index';
@@ -25,6 +29,10 @@ class Collection extends CI_Controller
 
     public function AddToCollection($idGame)
     {
+        if ($this->session->userdata("user_id") == null) {
+            $this->session->set_flashdata('error_msg', 'You are not connected.');
+            redirect(base_url('user/login_view'));
+        }
         $this->Collection_model->createOrUpdate($idGame);
         $game = $this->Game_model->get_game_by_id($idGame);
         $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection.');
@@ -33,6 +41,10 @@ class Collection extends CI_Controller
 
     public function RemoveToCollection($idGame)
     {
+        if ($this->session->userdata("user_id") == null) {
+            $this->session->set_flashdata('error_msg', 'You are not connected.');
+            redirect(base_url('user/login_view'));
+        }
         $this->Collection_model->delete($idGame);
         $game = $this->Game_model->get_game_by_id($idGame);
         $this->session->set_flashdata('success_msg', $game->titre . ' deleted to your collection.');

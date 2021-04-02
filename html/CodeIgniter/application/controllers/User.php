@@ -78,7 +78,7 @@ class User extends CI_Controller
                 $this->session->set_userdata('user_name', $data['users'][0]['username']);
                 $this->session->set_userdata('user_role', $data['users'][0]['role']);
 
-            redirect(base_url("games"));
+                redirect(base_url("games"));
             }
         } else {
             $this->session->set_flashdata('error_msg', 'Wrong combination of username and password. Please retry.');
@@ -86,7 +86,12 @@ class User extends CI_Controller
         }
     }
 
-    public function profile() {
+    public function profile()
+    {
+        if ($this->session->userdata("user_id") == null) {
+            $this->session->set_flashdata('error_msg', 'You are not connected.');
+            redirect(base_url('user/login_view'));
+        }
         $data['title'] = 'Profile';
         $data['content'] = 'user/profile';
         $this->load->vars($data);
