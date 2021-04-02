@@ -16,8 +16,13 @@ class Collection extends CI_Controller
         $data['collection'] = $this->Game_model->get_collection_by_id(1);
         $data['title'] = 'Collection';
         $data['content'] = 'games/list';
-        
+
         $this->load->vars($data);
         $this->load->view('template');
+    }
+
+    public function AddToCollection($idGame)
+    {
+        var_dump($idGame);
     }
 }

@@ -14,6 +14,9 @@
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Sortie
               </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -26,6 +29,9 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap"><?php echo $game['titre']; ?></td>
                 <td class="px-6 py-4 whitespace-nowrap"><?php echo $game['sortie']; ?></td>
+                <td>
+                  <a href="<?php echo base_url("Collection/AddToCollection/" . $game['id']); ?>" class="btn red" style="height: 20px; border-radius:4px;">Add to your collection</a>
+                </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
