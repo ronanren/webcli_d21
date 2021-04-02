@@ -25,3 +25,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Fichiers de config
+html/CodeIgniter/application/config/config.php

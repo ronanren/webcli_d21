@@ -34,7 +34,7 @@ class User extends CI_Controller
             redirect(base_url('user/login_view'));
         } else {
             $this->session->set_flashdata('error_msg', 'This username is already taken by another user.');
-            redirect('user');
+            redirect(base_url('user'));
         }
     }
 
