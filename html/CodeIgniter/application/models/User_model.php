@@ -37,6 +37,12 @@ class User_model extends CI_model
             return true;
     }
 
+    public function users_list()
+    {
+        $query = $this->db->get('users');
+        return $query->result_array();
+    }
+
     public function user_ban($id)
     {
         $this->db->where('id', $id);
