@@ -24,17 +24,30 @@ class User extends CI_Controller
     {
         $user = array(
             'username' => $this->input->post('user_name'),
-            'password' => md5($this->input->post('user_password'))
+            'password' => $this->input->post('user_password'),
+            'role' => "collector"
         );
 
-        $name_check = $this->user_model->name_check($user['username']);
+        if (strlen($user['username']) > 3) {
+            if (strlen($user['password']) > 3) {
 
-        if ($name_check) {
-            $this->user_model->register_user($user);
-            $this->session->set_flashdata('success_msg', 'Registered successfully. You can login to your account.');
-            redirect(base_url('user/login_view'));
+                $user['password'] = md5($user['password']); // md5 hash of password
+                $name_check = $this->user_model->name_check($user['username']); // check if the name is already taken by another user
+
+                if ($name_check) {
+                    $this->user_model->register_user($user);
+                    $this->session->set_flashdata('success_msg', 'Registered successfully. You can login to your account.');
+                    redirect(base_url('user/login_view'));
+                } else {
+                    $this->session->set_flashdata('error_msg', 'This username is already taken by another user.');
+                    redirect(base_url('user'));
+                }
+            } else {
+                $this->session->set_flashdata('error_msg', 'Password length must be greater than 3 characters.');
+                redirect(base_url('user'));
+            }
         } else {
-            $this->session->set_flashdata('error_msg', 'This username is already taken by another user.');
+            $this->session->set_flashdata('error_msg', 'Username length must be greater than 3 characters.');
             redirect(base_url('user'));
         }
     }
@@ -59,6 +72,7 @@ class User extends CI_Controller
         if ($data['users']) {
             $this->session->set_userdata('user_id', $data['users'][0]['id']);
             $this->session->set_userdata('user_name', $data['users'][0]['username']);
+            $this->session->set_userdata('user_role', $data['users'][0]['role']);
 
             $data['title'] = 'Profile';
             $data['content'] = 'user/profile';
