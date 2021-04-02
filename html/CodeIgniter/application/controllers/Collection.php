@@ -23,6 +23,6 @@ class Collection extends CI_Controller
 
     public function AddToCollection($idGame)
     {
-        var_dump($idGame);
+        $this->Collection_model->createOrUpdate($idGame);
     }
 }

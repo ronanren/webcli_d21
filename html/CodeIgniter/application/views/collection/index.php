@@ -1,5 +1,5 @@
 <?php
 
-foreach($games as $game) {
-    echo($game);
+foreach ($games as $game) {
+    var_dump($game);
 }

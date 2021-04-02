@@ -1,6 +1,7 @@
 <?php
-class Collection_model extends CI_Model {
-  
+class Collection_model extends CI_Model
+{
+
     public function __construct()
     {
         $this->load->database();
@@ -15,15 +16,15 @@ class Collection_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-     
-    public function createOrUpdate()
+
+    public function createOrUpdate($idGame)
     {
         $this->load->helper('url');
         $id = $this->input->post('id');
- 
+
         $data = array(
             'user_id' => 1,
-            'game_id' => $this->input->post('game_id')
+            'game_id' => $idGame
         );
 
         if (empty($id)) {
@@ -33,7 +34,7 @@ class Collection_model extends CI_Model {
             return $this->db->update('collection', $data);
         }
     }
-     
+
     public function delete($id)
     {
         $this->db->where('id', $id);
