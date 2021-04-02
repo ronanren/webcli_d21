@@ -19,7 +19,7 @@ class Collection extends CI_Controller
             $this->session->set_flashdata('error_msg', 'You are not connected.');
             redirect(base_url('user/login_view'));
         }
-        $data['games'] = $this->Collection_model->get_games_by_collection_id(1);
+        $data['games'] = $this->Collection_model->get_games_by_user_id($this->session->userdata("user_id"));
         $data['title'] = 'Collection';
         $data['content'] = 'collection/index';
 

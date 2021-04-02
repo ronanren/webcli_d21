@@ -7,7 +7,7 @@ class Collection_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_games_by_collection_id($user_id)
+    public function get_games_by_user_id($user_id)
     {
         $this->db->select('*');
         $this->db->from('collection');
