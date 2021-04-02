@@ -13,6 +13,7 @@ class User extends CI_Controller
 
     public function index()
     {
+        // $this->check_msg();
         $data['title'] = 'Register';
         $data['content'] = 'user/register';
         $this->load->vars($data);
@@ -25,6 +26,8 @@ class User extends CI_Controller
             'username' => $this->input->post('user_name'),
             'password' => md5($this->input->post('user_password'))
         );
+
+
 
         $name_check = $this->user_model->name_check($user['username']);
 
@@ -68,6 +71,7 @@ class User extends CI_Controller
     public function user_logout()
     {
         $this->session->sess_destroy();
+        $this->session->set_flashdata('success_msg', 'You have been disconnected successfully.');
         redirect(base_url('user/login_view'), 'refresh');
     }
 }
