@@ -33,25 +33,27 @@ class Collection extends CI_Controller
             $this->session->set_flashdata('error_msg', 'You are not connected.');
             redirect(base_url('user/login_view'));
         }
+        $game = $this->Game_model->get_game_by_id($idGame);
+        if ($this->Collection_model->get_association($idGame, $this->session->userdata("user_id"))) {
+            $this->session->set_flashdata('error_msg', $game->titre . ' is already in your collection.');
+            redirect(base_url('Games'));
+        }
 
         $query = $this->Collection_model->get_games_by_user_id($this->session->userdata("user_id"));
         $nbrInCollection = sizeof($query);
 
         if ($nbrInCollection == 5) {
             $mostRecent = $this->Collection_model->get_most_recent();
+            $mostRecentName = $this->Game_model->get_game_by_id($mostRecent->game_id);
             $this->Collection_model->delete($mostRecent->game_id);
         }
 
-        $result = $this->Collection_model->createOrUpdate($idGame);
-        $game = $this->Game_model->get_game_by_id($idGame);
+        $this->Collection_model->createOrUpdate($idGame);
 
-        if ($result) {
+        if ($nbrInCollection == 5)
+            $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection. You have 5 games, we deleted the last game of your collection (' . $mostRecentName->titre . ').');
+        else
             $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection.');
-            if ($nbrInCollection == 5)
-                $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection. You have 5 games, we deleted a game.');
-        } else {
-            $this->session->set_flashdata('error_msg', $game->titre . ' is already in your collection.');
-        }
         redirect(base_url('Games'));
     }
 

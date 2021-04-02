@@ -28,10 +28,6 @@ class Collection_model extends CI_Model
             'game_id' => $idGame
         );
 
-        if ($this->get_association($idGame, $user_id)) {
-            return false;
-        }
-
         if (empty($id)) {
             return $this->db->insert('collection', $data);
         } else {
