@@ -63,6 +63,7 @@ class User_model extends CI_model
 
     public function user_delete($id)
     {
-        $this->db->query("DELETE FROM users WHERE id = $id");
+        $this->db->query("DELETE FROM collection WHERE user_id = $id"); // delete collection of user
+        $this->db->query("DELETE FROM users WHERE id = $id"); // delete user
     }
 }

@@ -14,10 +14,13 @@
 
 		public function index()
 		{
+			if ($this->session->userdata("user_id") == null) {
+				$this->session->set_flashdata('error_msg', 'You are not connected.');
+				redirect(base_url('user/login_view'));
+			}
 			$data['users'] = $this->User_model->users_list();
 			$data['title'] = 'Administration';
 			$data['content'] = 'Administration/administration';
-
 			$this->load->vars($data);
 			$this->load->view('template');
 		}
