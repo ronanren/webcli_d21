@@ -13,9 +13,9 @@ class Collection extends CI_Controller
 
     public function index()
     {
-        $data['collection'] = $this->Game_model->get_collection_by_id(1);
+        $data['games'] = $this->Collection_model->get_games_by_collection_id(1);
         $data['title'] = 'Collection';
-        $data['content'] = 'games/list';
+        $data['content'] = 'collection/index';
 
         $this->load->vars($data);
         $this->load->view('template');

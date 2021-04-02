@@ -6,9 +6,13 @@ class Collection_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get_collection_by_id($user_id)
+    public function get_games_by_collection_id($user_id)
     {
-        $query = $this->db->get_where('collection', array('user' => $user_id));
+        $this->db->select('*');
+        $this->db->from('collection');
+        $this->db->where('user_id', $user_id);
+        $this->db->join('games', 'games.id = collection.game_id');
+        $query = $this->db->get();
         return $query->result_array();
     }
      
@@ -18,7 +22,7 @@ class Collection_model extends CI_Model {
         $id = $this->input->post('id');
  
         $data = array(
-            'user_id' => $this->input->post('user_id'),
+            'user_id' => 1,
             'game_id' => $this->input->post('game_id')
         );
 
