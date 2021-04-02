@@ -34,11 +34,21 @@ class Collection extends CI_Controller
             redirect(base_url('user/login_view'));
         }
 
+        $query = $this->Collection_model->get_games_by_user_id($this->session->userdata("user_id"));
+        $nbrInCollection = sizeof($query);
+
+        if ($nbrInCollection == 5) {
+            $mostRecent = $this->Collection_model->get_most_recent();
+            $this->Collection_model->delete($mostRecent->game_id);
+        }
+
         $result = $this->Collection_model->createOrUpdate($idGame);
         $game = $this->Game_model->get_game_by_id($idGame);
 
         if ($result) {
             $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection.');
+            if ($nbrInCollection == 5)
+                $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection. You have 5 games, we deleted a game.');
         } else {
             $this->session->set_flashdata('error_msg', $game->titre . ' is already in your collection.');
         }
