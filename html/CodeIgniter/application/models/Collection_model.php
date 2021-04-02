@@ -19,13 +19,18 @@ class Collection_model extends CI_Model
 
     public function createOrUpdate($idGame)
     {
+        $user_id = $this->session->userdata("user_id");
         $this->load->helper('url');
         $id = $this->input->post('id');
 
         $data = array(
-            'user_id' => 1,
+            'user_id' => $user_id,
             'game_id' => $idGame
         );
+
+        if ($this->get_association($idGame, $user_id)) {
+            return false;
+        }
 
         if (empty($id)) {
             return $this->db->insert('collection', $data);
@@ -39,5 +44,11 @@ class Collection_model extends CI_Model
     {
         $this->db->where(array('game_id' => $id, 'user_id' => 1));
         return $this->db->delete('collection');
+    }
+
+    public function get_association($game_id, $user_id)
+    {
+        $query = $this->db->get_where('collection', ['game_id' => $game_id, 'user_id' => $user_id]);
+        return $query->row();
     }
 }

@@ -33,9 +33,15 @@ class Collection extends CI_Controller
             $this->session->set_flashdata('error_msg', 'You are not connected.');
             redirect(base_url('user/login_view'));
         }
-        $this->Collection_model->createOrUpdate($idGame);
+
+        $result = $this->Collection_model->createOrUpdate($idGame);
         $game = $this->Game_model->get_game_by_id($idGame);
-        $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection.');
+
+        if ($result) {
+            $this->session->set_flashdata('success_msg', $game->titre . ' added to your collection.');
+        } else {
+            $this->session->set_flashdata('error_msg', $game->titre . ' is already in your collection.');
+        }
         redirect(base_url('Games'));
     }
 
