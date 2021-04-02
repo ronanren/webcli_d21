@@ -70,14 +70,19 @@ class User extends CI_Controller
         $data['users'] = $this->user_model->login_user($user_login['username'], $user_login['password']);
 
         if ($data['users']) {
-            $this->session->set_userdata('user_id', $data['users'][0]['id']);
-            $this->session->set_userdata('user_name', $data['users'][0]['username']);
-            $this->session->set_userdata('user_role', $data['users'][0]['role']);
+            if ($data['users'][0]['role'] === 'banned') {
+                $this->session->set_flashdata('error_msg', 'You are not allowed to login because you account is banned.');
+                redirect(base_url('user/login_view'));
+            } else {
+                $this->session->set_userdata('user_id', $data['users'][0]['id']);
+                $this->session->set_userdata('user_name', $data['users'][0]['username']);
+                $this->session->set_userdata('user_role', $data['users'][0]['role']);
 
-            $data['title'] = 'Profile';
-            $data['content'] = 'user/profile';
-            $this->load->vars($data);
-            $this->load->view('template');
+                $data['title'] = 'Profile';
+                $data['content'] = 'user/profile';
+                $this->load->vars($data);
+                $this->load->view('template');
+            }
         } else {
             $this->session->set_flashdata('error_msg', 'Wrong combination of username and password. Please retry.');
             redirect(base_url('user/login_view'));
