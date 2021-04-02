@@ -137,6 +137,10 @@ class User extends CI_Controller
         redirect(base_url('administration'));
     }
 
+    public function display_delete($id)
+    {
+    }
+
     public function user_delete($id)
     {
         $user = $this->user_model->get_user_by_id($id);
