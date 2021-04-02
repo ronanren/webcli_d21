@@ -22,14 +22,15 @@
 						<div class="hidden md:block">
 							<div class="ml-10 flex items-baseline space-x-4">
 								<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-								<a href="<?php echo base_url("Games"); ?>" class="<?php echo $this->router->fetch_class() == "Games" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Games</a>
+								<a href="<?php echo base_url("games"); ?>" class="<?php echo $this->router->fetch_class() == "games" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Games</a>
 
 								<?php if (null != $this->session->userdata("user_id")) { ?>
 
-									<a href="<?php echo base_url("Collection"); ?>" class="<?php echo $this->router->fetch_class() == "Collection" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Collection</a>
+									<a href="<?php echo base_url("collection"); ?>" class="<?php echo $this->router->fetch_class() == "collection" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Collection</a>
 
-									<a href="<?php echo base_url("Administration"); ?>" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administration</a>
-
+									<?php if ($this->session->userdata("user_role") == "admin") { ?>
+										<a href="<?php echo base_url("administration"); ?>" class="<?php echo $this->router->fetch_class() == "administration" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> px-3 py-2 rounded-md text-sm font-medium">Administration</a>
+									<?php } ?>
 								<?php } ?>
 							</div>
 						</div>
@@ -94,12 +95,16 @@
 			<div class="hidden md:hidden" id="mobile-menu">
 				<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 					<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-					<a href="<?php echo base_url("Games"); ?>" class="<?php echo $this->router->fetch_class() == "Games" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Games</a>
+					<a href="<?php echo base_url("games"); ?>" class="<?php echo $this->router->fetch_class() == "games" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Games</a>
 					
 					<?php if (null != $this->session->userdata("user_id")) { ?>
-						<a href="<?php echo base_url("Collection"); ?>" class="<?php echo $this->router->fetch_class() == "Collection" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Collection</a>
+						<a href="<?php echo base_url("collection"); ?>" class="<?php echo $this->router->fetch_class() == "collection" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Collection</a>
 
-						<a href="<?php echo base_url("Administration"); ?>" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Administration</a>
+						<?php if ($this->session->userdata("user_role") == "admin") { ?>
+
+							<a href="<?php echo base_url("administration"); ?>" class="<?php echo $this->router->fetch_class() == "administration" ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> block px-3 py-2 rounded-md text-base font-medium">Administration</a>
+
+						<?php } ?>
 					<?php } ?>
 				</div>
 				<div class="pt-4 pb-3 border-t border-gray-700">

@@ -78,7 +78,7 @@ class User extends CI_Controller
                 $this->session->set_userdata('user_name', $data['users'][0]['username']);
                 $this->session->set_userdata('user_role', $data['users'][0]['role']);
 
-            redirect(base_url("games"));
+                redirect(base_url("games"));
             }
         } else {
             $this->session->set_flashdata('error_msg', 'Wrong combination of username and password. Please retry.');
