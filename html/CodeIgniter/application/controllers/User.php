@@ -24,7 +24,8 @@ class User extends CI_Controller
     {
         $user = array(
             'username' => $this->input->post('user_name'),
-            'password' => $this->input->post('user_password')
+            'password' => $this->input->post('user_password'),
+            'role' => "collector"
         );
 
         if (strlen($user['username']) > 3) {
@@ -71,6 +72,7 @@ class User extends CI_Controller
         if ($data['users']) {
             $this->session->set_userdata('user_id', $data['users'][0]['id']);
             $this->session->set_userdata('user_name', $data['users'][0]['username']);
+            $this->session->set_userdata('user_role', $data['users'][0]['role']);
             $this->load->view('user/profile.php', $data);
         } else {
             $this->session->set_flashdata('error_msg', 'Wrong combination of username and password. Please retry.');

@@ -28,6 +28,14 @@ if (!$user_id) {
 					</tr>
 					<?php foreach ($users as $key => $val) { ?>
 						<tr>
+							<td>User ID</td>
+							<td><?php echo $this->session->userdata('user_id'); ?></td>
+						</tr>
+						<tr>
+							<td>User Role</td>
+							<td><?php echo $this->session->userdata('user_role'); ?></td>
+						</tr>
+						<tr>
 							<td>User Name</td>
 							<td><?php echo $this->session->userdata('user_name'); ?></td>
 						</tr>
