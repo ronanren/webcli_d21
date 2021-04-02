@@ -6,6 +6,7 @@ class Games extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Game_model');
+        $this->load->model('Collection_model');
         $this->load->helper('url_helper');
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -22,58 +23,20 @@ class Games extends CI_Controller
         $this->load->view('template');
     }
 
-    public function create()
+    public function details($game_id)
     {
-        $data['title'] = 'Create Game';
-        $this->load->view('games/create', $data);
-    }
+        $user_id = $this->session->userdata("user_id");
+        $data['game'] = $this->Game_model->get_game_by_id($game_id);
 
-    public function edit($id)
-    {
-        $id = $this->uri->segment(3);
-        $data = [];
-
-        if (empty($id)) {
-            show_404();
+        if (!$user_id) {
+            $data['added'] = false;
         } else {
-            $data['game'] = $this->game_model->get_games_by_id($id);
-            $this->load->view('games/edit', $data);
+            $data['added'] = $this->Collection_model->get_association($game_id, $user_id) ? true : false;
         }
-    }
+        $data['title'] = $data['game']->titre;
+        $data['content'] = 'games/details';
 
-    public function store()
-    {
-
-        $this->form_validation->set_rules('guid', 'guid', 'required');
-        $this->form_validation->set_rules('titre', 'title', 'required');
-        $this->form_validation->set_rules('sortie', 'release date', 'required');
-        $this->form_validation->set_rules('description', 'description', 'required');
-        $this->form_validation->set_rules('couverture', 'cover', 'required');
-
-        $id = $this->input->post('id');
-
-        if ($this->form_validation->run() === FALSE) {
-            if (empty($id)) {
-                redirect(base_url('game/create'));
-            } else {
-                redirect(base_url('game/edit/' . $id));
-            }
-        } else {
-            $data['game'] = $this->game_model->createOrUpdate();
-            redirect(base_url('game'));
-        }
-    }
-
-    public function delete()
-    {
-        $id = $this->uri->segment(3);
-
-        if (empty($id)) {
-            show_404();
-        }
-
-        $games = $this->game_model->delete($id);
-
-        redirect(base_url('game'));
+        $this->load->vars($data);
+        $this->load->view('template');
     }
 }

@@ -14,11 +14,9 @@
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Sortie
               </th>
-              <?php if (null != $this->session->userdata("user_id")) { ?>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Action
-                </th>
-              <?php } ?>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -31,11 +29,12 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap"><?php echo $game['titre']; ?></td>
                 <td class="px-6 py-4 whitespace-nowrap"><?php echo $game['sortie']; ?></td>
-                <?php if (null != $this->session->userdata("user_id")) { ?>
-                  <td>
-                    <a href="<?php echo base_url("Collection/AddToCollection/" . $game['id']); ?>" class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" style="height: 20px; border-radius:4px;">Add to your collection</a>
-                  </td>
-                <?php } ?>
+                <td class="px-6 py-4 whitespace-nowrap flex flex-col justify-center h-40">
+                  <?php if (null != $this->session->userdata("user_id")) { ?>
+                    <a href="<?php echo base_url("Collection/AddToCollection/" . $game['id']); ?>" class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-center">Add to your collection</a>
+                  <?php } ?>
+                  <a href="<?php echo base_url("games/details/" . $game['id']); ?>" class="py-2 px-4 mt-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-center">See details</a>
+                </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
